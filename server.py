@@ -1,14 +1,14 @@
 from flask import Flask, request, jsonify
 import joblib
+import os
 import numpy as np
 import pandas as pd
 
 app = Flask(__name__)
 
-# Загружаем свежую модель
-MODEL_PATH = r"C:\server\plugins\FineAC\datacollection\model.pkl"
+# Загружаем модель из того же каталога, что и server.py
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
 model = joblib.load(MODEL_PATH)
-
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
